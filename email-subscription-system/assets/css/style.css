@@ -1,0 +1,421 @@
+/* Email Subscription System - Main Styles */
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #2563eb;
+    --primary-dark: #1d4ed8;
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --warning-color: #f59e0b;
+    --text-color: #1f2937;
+    --text-light: #6b7280;
+    --bg-overlay: rgba(0, 0, 0, 0.4);
+    --form-bg: rgba(255, 255, 255, 0.95);
+    --border-radius: 8px;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* Video background */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    object-fit: cover;
+}
+
+.video-background.fallback {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-size: cover;
+    background-position: center;
+}
+
+/* Body fallback background when video fails or slow connection */
+body.fallback-bg {
+    background: url('../images/hero-bg.jpg') center center / cover no-repeat,
+                linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
+}
+
+/* Mobile fallback optimization - fixed attachment can cause performance issues */
+@media (max-width: 768px) {
+    body.fallback-bg {
+        background-attachment: scroll;
+    }
+}
+
+/* Background overlay */
+.background-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: calc(33.333% + 3rem);
+    height: 100%;
+    background: var(--bg-overlay);
+    z-index: -1;
+}
+
+/* Main container */
+.hero-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 2rem 1rem;
+    position: relative;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 600px;
+    width: calc(33.333% - 2rem);
+    margin-right: 2rem;
+    min-width: 350px;
+}
+
+/* Typography */
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2.5rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+/* Subscription form */
+.subscription-form {
+    background: var(--form-bg);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-input.error {
+    border-color: var(--error-color);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.form-input.success {
+    border-color: var(--success-color);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* Submit button */
+.submit-btn {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+.submit-btn:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.submit-btn.loading {
+    color: transparent;
+}
+
+.submit-btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s ease-in-out infinite;
+}
+
+/* Messages */
+.message {
+    padding: 0.875rem 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    font-weight: 500;
+    animation: slideDown 0.3s ease-out;
+}
+
+.message.success {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.message.error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+.message.warning {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+}
+
+/* Connection indicator */
+.connection-indicator {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.connection-indicator.online {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.connection-indicator.offline {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* Unsubscribe link */
+.unsubscribe-link {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+
+.unsubscribe-link:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Connection speed detection - notification removed for better UX */
+
+/* Large desktop optimization */
+@media (min-width: 1800px) {
+    .hero-content {
+        max-width: 700px;
+    }
+}
+
+/* Responsive design - Full width for tablets and mobile */
+@media (max-width: 1024px) {
+    .background-overlay {
+        left: 0;
+        right: 0;
+        width: 100%;
+    }
+
+    .hero-container {
+        padding: 2rem 1rem;
+        justify-content: center;
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 600px;
+        margin-right: 0;
+    }
+
+    .unsubscribe-link {
+        bottom: 2rem;
+        left: 2rem;
+    }
+}
+
+/* Mobile specific optimizations */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.125rem;
+    }
+
+    .subscription-form {
+        padding: 2rem 1.5rem;
+        margin: 0 1rem;
+    }
+
+    .hero-container {
+        padding: 1rem;
+    }
+
+    .unsubscribe-link {
+        bottom: 1rem;
+        left: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .subscription-form {
+        padding: 1.5rem 1rem;
+    }
+
+    .form-input, .submit-btn {
+        padding: 0.75rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    .video-background,
+    .background-overlay,
+    .unsubscribe-link,
+    .connection-indicator {
+        display: none;
+    }
+
+    .hero-container {
+        background: white;
+        color: black;
+    }
+
+    .hero-title,
+    .hero-subtitle {
+        color: black;
+        text-shadow: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    :root {
+        --bg-overlay: rgba(0, 0, 0, 0.8);
+        --form-bg: rgba(255, 255, 255, 1);
+    }
+
+    .form-input {
+        border-width: 3px;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

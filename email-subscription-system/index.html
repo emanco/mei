@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Subscribe to our newsletter for the latest updates and exclusive content.">
+    <meta name="keywords" content="newsletter, subscription, updates, news">
+    <meta name="author" content="Your Company">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Subscribe to Our Newsletter">
+    <meta property="og:description" content="Get the latest updates and exclusive content delivered to your inbox.">
+    <meta property="og:url" content="https://yourwebsite.com">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Subscribe to Our Newsletter">
+    <meta property="twitter:description" content="Get the latest updates and exclusive content delivered to your inbox.">
+
+    <title>Subscribe to Our Newsletter</title>
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="assets/css/style.css" as="style">
+    <link rel="preload" href="assets/js/main.js" as="script">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+
+    <!-- Prevent FOUC (Flash of Unstyled Content) -->
+    <script>
+        document.documentElement.style.visibility = 'hidden';
+        document.addEventListener('DOMContentLoaded', function() {
+            document.documentElement.style.visibility = 'visible';
+        });
+    </script>
+</head>
+<body>
+    <!-- Video Background -->
+    <video id="bg-video" class="video-background" autoplay muted loop playsinline>
+        <source src="assets/video/hero-bg.mp4" type="video/mp4">
+        <!-- Fallback background will be handled by CSS and JavaScript -->
+    </video>
+
+    <!-- Main Content -->
+    <main class="hero-container">
+        <!-- Background Overlay -->
+        <div class="background-overlay"></div>
+
+        <div class="hero-content">
+            <!-- Hero Text -->
+            <h1 class="hero-title">Stay Updated</h1>
+            <p class="hero-subtitle">
+                Get the latest news, updates, and exclusive content delivered straight to your inbox.
+                Join thousands of subscribers who trust us with their inbox.
+            </p>
+
+            <!-- Subscription Form -->
+            <form id="subscription-form" class="subscription-form" novalidate>
+                <!-- Message Container -->
+                <div id="message-container" role="alert" aria-live="polite"></div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        class="form-input"
+                        placeholder="Enter your email address"
+                        required
+                        autocomplete="email"
+                        aria-describedby="email-help"
+                    >
+                    <div id="email-help" class="sr-only">
+                        We'll never share your email with anyone else.
+                    </div>
+                </div>
+
+                <button type="submit" id="submit-btn" class="submit-btn">
+                    Subscribe Now
+                </button>
+
+                <!-- Privacy Notice -->
+                <p class="privacy-notice" style="margin-top: 1rem; font-size: 0.875rem; color: #6b7280; text-align: center;">
+                    We respect your privacy. Unsubscribe at any time.
+                    <br>
+                    <a href="#privacy" style="color: #2563eb; text-decoration: none;">Privacy Policy</a>
+                </p>
+            </form>
+        </div>
+    </main>
+
+    <!-- Unsubscribe Link -->
+    <a href="unsubscribe.html" class="unsubscribe-link">
+        Unsubscribe
+    </a>
+
+    <!-- Connection Status Indicator (dynamically added by JS) -->
+
+    <!-- Screen Reader Only Content -->
+    <div class="sr-only">
+        <h2>Newsletter Subscription Form</h2>
+        <p>Subscribe to receive updates and exclusive content via email.</p>
+    </div>
+
+    <!-- Accessibility Styles -->
+    <style>
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus styles for better accessibility */
+        .form-input:focus,
+        .submit-btn:focus,
+        .unsubscribe-link:focus {
+            outline: 2px solid #2563eb;
+            outline-offset: 2px;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .hero-title,
+            .hero-subtitle {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .video-background {
+                display: none;
+            }
+
+            body {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --form-bg: rgba(31, 41, 55, 0.95);
+                --text-color: #f9fafb;
+            }
+        }
+    </style>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Service Worker removed to eliminate 404 errors (can be added later if offline functionality is needed) -->
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Newsletter Subscription",
+        "description": "Subscribe to our newsletter for the latest updates and exclusive content.",
+        "url": "https://yourwebsite.com",
+        "mainEntity": {
+            "@type": "NewsletterService",
+            "name": "Your Newsletter",
+            "description": "Regular updates and exclusive content",
+            "provider": {
+                "@type": "Organization",
+                "name": "Your Company"
+            }
+        }
+    }
+    </script>
+</body>
+</html>
